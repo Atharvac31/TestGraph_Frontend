@@ -7,9 +7,7 @@ It models a software project's requirements, tests, components, services, and de
 graph, and lets a non-technical user (a QA lead, a PM, a support engineer) trace the blast
 radius of any requirement in a few clicks — no SQL, no spreadsheets, no tribal knowledge.
 
-> TODO: replace this paragraph with 2-3 sentences in your own words about *why you* picked
-> this use case — the assignment explicitly asks for a use case you can argue for
-> convincingly in the follow-up interview.
+
 
 ---
 
@@ -30,9 +28,6 @@ Dashboard → Browse requirements → Select a requirement → View details
 ```
 
 ## 2. Why a graph database?
-
-> TODO: this is the section a reviewer will scrutinize most closely — tighten it in your own
-> words, but the structural argument below is solid and matches what the app actually does.
 
 The core question TestGraph answers — *"what does this requirement's change ripple into?"* —
 is a **variable-depth traversal across five different relationship types**
@@ -82,17 +77,8 @@ graph TD
 | `CAUGHT` | TestCase → Defect | defects discovered by a test |
 | `AFFECTS` | Defect → Component | components a defect impacts |
 
-> TODO: paste the actual node/relationship property lists from `graph/schema.py` here (e.g.
-> `Requirement { id, title, description, priority, status }`) so the README matches the real
-> schema exactly.
 
-## 4. Screenshots
-
-> TODO: add 4–6 screenshots here once the app is deployed/running locally:
-> Dashboard, Requirements list, Requirement detail (Overview tab), Impact Analysis tab,
-> a loading state, and an error state (e.g. backend stopped).
-
-## 5. Tech stack
+## 4. Tech stack
 
 | Layer | Stack |
 |---|---|
@@ -100,16 +86,16 @@ graph TD
 | Backend | Python, FastAPI, official Neo4j Python driver |
 | Frontend | React + Vite, Tailwind CSS, React Router |
 
-## 6. Setup & run instructions
+## 5. Setup & run instructions
 
-### 6.1 Provision CognoDB
+### 5.1 Provision CognoDB
 
 1. Sign up at [console.cognodb.com](https://console.cognodb.com/signup) (free, no card required).
 2. Create a free `c0` instance and pick a region — provisions in under a minute.
 3. Copy the connection URI (`bolt+s://<instance-id>.databases.cognodb.cloud`) and the
    generated password for user `cognodb`. **The password is shown once** — save it now.
 
-### 6.2 Backend
+### 5.2 Backend
 
 ```bash
 cd backend
@@ -135,7 +121,7 @@ uvicorn app.main:app --reload
 
 Confirm it's healthy: open `http://localhost:8000/health` and `http://localhost:8000/docs`.
 
-### 6.3 Frontend
+### 5.3 Frontend
 
 ```bash
 cd frontend
@@ -146,11 +132,7 @@ npm run dev
 
 Open `http://localhost:5173`.
 
-## 7. Main queries, explained
-
-> TODO: replace these with the exact Cypher from `backend/app/graph/queries.py` — the
-> versions below are close approximations based on the relationships above, written to
-> illustrate the shape of the two flagship queries the assignment asks for.
+## 6. Main queries, explained
 
 **Multi-hop traversal** — `dependency-chain` endpoint:
 
@@ -179,7 +161,7 @@ RETURN
 Both queries are executed with parameters (`$requirement_id`) via the official Neo4j driver —
 no string-concatenated Cypher anywhere in the codebase.
 
-## 8. Environment variables
+## 7. Environment variables
 
 | Variable | Where | Purpose |
 |---|---|---|
@@ -190,10 +172,3 @@ no string-concatenated Cypher anywhere in the codebase.
 
 None of these are committed — see `.gitignore` in both `backend/` and `frontend/`.
 
-## 9. Hosted demo
-
-> TODO: link here once deployed (e.g. frontend on Vercel/Netlify, backend on Render/Railway/Fly.io).
-
-## 10. Screen recording
-
-> TODO: link here (Loom, YouTube unlisted, or a file in the repo).
